@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Valentine Surprise</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(to right,#ff9a9e,#fad0c4);
+text-align:center;
+color:white;
+overflow:hidden;
+}
+
+.envelope{
+width:220px;
+display:block;
+margin:150px auto;
+cursor:pointer;
+transition:0.4s;
+}
+
+.envelope:hover{
+transform:scale(1.1);
+}
+
+.container{
+display:none;
+margin-top:60px;
+}
+
+.box{
+background:white;
+color:#ff4d6d;
+padding:25px;
+width:70%;
+margin:auto;
+border-radius:20px;
+font-size:20px;
+}
+
+button{
+margin:15px;
+padding:12px 30px;
+font-size:18px;
+border:none;
+border-radius:12px;
+background:#ff4d6d;
+color:white;
+cursor:pointer;
+}
+
+.heart{
+position:fixed;
+bottom:-20px;
+font-size:22px;
+animation:floatUp 5s linear infinite;
+}
+
+@keyframes floatUp{
+100%{transform:translateY(-100vh);}
+}
+
+/* ⭐ PERFECT CENTER VIDEO */
+#videoSlide{
+display:none;
+height:100vh;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+
+#videoSlide video{
+display:block;
+margin:auto;
+}
+
+/* Photo */
+.slide{
+display:none;
+margin:auto;
+}
+</style>
+</head>
+
+<body>
+
+<h2>💌 Tap the Envelope 💌</h2>
+
+<img src="https://cdn-icons-png.flaticon.com/512/561/561127.png"
+class="envelope"
+onclick="openEnvelope()">
+
+<div class="container" id="mainContent">
+
+<div class="box" id="msgBox"></div>
+
+<div id="choiceButtons" style="display:none;">
+<button onclick="yesAnswer()">Yes 💖</button>
+<button id="noBtn" onmouseover="moveNo()">No 😢</button>
+</div>
+
+<button id="nextBtn" onclick="nextStep()">Next ➡</button>
+
+<!-- VIDEO -->
+<div id="videoSlide">
+<h2>✨ Special Memory Video ✨</h2>
+
+<video id="memoryVideo" width="360" controls>
+<source src="sann.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<!-- PHOTO -->
+<div id="photoSlide" style="display:none;">
+ 
+<h2>💖 Our Memories Forever 💖</h2>
+<a href='https://postimg.cc/qt3Kwtkt' target='_blank'><img src='https://i.postimg.cc/YSXxpgZx/Whats-App-Image-2026-02-10-at-9-43-39-PM.jpg' border='0' alt='Whats-App-Image-2026-02-10-at-9-43-39-PM'></a>
+
+<a href='https://postimg.cc/MXLTrPgJ' target='_blank'><img src='https://i.postimg.cc/sDjhxbcx/Whats-App-Image-2026-02-10-at-6-31-00-PM.jpg' border='0' alt='Whats-App-Image-2026-02-10-at-6-31-00-PM'></a>
+
+
+</div>
+
+
+<audio id="music" loop>
+<source src="dude.MPEG" type="audio/mpeg">
+</audio>
+
+<script>
+
+let step=0;
+
+/* ✅ MUSIC STARTS AFTER CLICKING ENVELOPE */
+function openEnvelope(){
+document.querySelector(".envelope").style.display="none";
+document.getElementById("mainContent").style.display="block";
+document.getElementById("music").play();
+nextStep();
+}
+
+function nextStep(){
+
+const box=document.getElementById("msgBox");
+
+if(step===0){
+box.innerHTML="Hiiii Sandeepuuuuu 🥰💕";
+}
+
+else if(step===1){
+box.innerHTML="Will you be my Valentine Sandeepuuuuuuu? 💖";
+document.getElementById("choiceButtons").style.display="block";
+document.getElementById("nextBtn").style.display="none";
+}
+
+else if(step===2){
+box.innerHTML="🌹 For You 🌹";
+}
+
+else if(step===3){
+box.innerHTML=`soooo happy valentines day kannaluuuuu 😘❤️💋  
+I'm so happy evala manam 1st Valentines Day ma love start ayyaka…  
+I just want this to be a good memory 💕  
+
+Niku telusu nv antey naku chala estam anii ❤️  
+Nv lekundaa nenu asla undalenuu 🥺  
+
+Nitho godvapadainaa naku asla estam undadhu 😔  
+Naku telusu nenu kuda niku antey chala chala estam 💖  
+
+And on this day thank you so much…  
+Naku kosam chala maravuuu 🫶  
+Enthalaga inka dani mundu emi chesina takkuvey ❤️  
+
+I know nenu chala niku kopam tepistanu 😣  
+But I'm really really sorry Sandeepuuuuu 🥺💋  
+Kopam lo vadilesi velopokuu…  
+
+Asla cheppali anteyy edhi chala happy ga undhi  
+Nitho elaga valentine week cheskutuna ❤️  
+
+Enni years of friendship…  
+And eppudu lovers 💑  
+And I'm waiting to be wifeee soooonn 💍❤️  
+
+Nenu niku echina nachakapovachu…  
+But naku matram ur the best gift Sandeepuuu 🎁❤️  
+
+Sooo I love you so much Sandeepuuuuuu ❤️❤️  
+And I'm missing you so muchhhh 🥺💋`;
+}
+
+else if(step===4){
+document.getElementById("msgBox").style.display="none";
+document.getElementById("nextBtn").style.display="none";
+
+let vidSlide=document.getElementById("videoSlide");
+vidSlide.style.display="flex";
+
+let vid=document.getElementById("memoryVideo");
+vid.onended=function(){
+nextStep();
+};
+}
+
+else if(step===5){
+document.getElementById("videoSlide").style.display="none";
+document.getElementById("photoSlide").style.display="block";
+setTimeout(nextStep,4000);
+}
+
+else if(step===6){
+document.getElementById("photoSlide").style.display="none";
+document.getElementById("msgBox").style.display="block";
+
+box.innerHTML=`❤️ Let’s be together forever Sandeepuuuuu ❤️  
+<br><br>
+Wait wait… anpudey avvaeldhu 😜  
+Ee website neku nachindho ledhoo teliyaduuu…  
+Nikooosam oka gift waiting pakkana chuduu darlinguuuu 💕`;
+}
+
+step++;
+}
+
+function yesAnswer(){
+document.getElementById("choiceButtons").style.display="none";
+document.getElementById("msgBox").innerHTML="Happpyyy Valentines Day Kannaluuuu 🥰😘❤️🌹";
+document.getElementById("music").play();
+document.getElementById("nextBtn").style.display="inline-block";
+step=2;
+}
+
+function moveNo(){
+const btn=document.getElementById("noBtn");
+btn.style.position="relative";
+btn.style.left=(Math.random()*200-100)+"px";
+btn.style.top=(Math.random()*200-100)+"px";
+}
+
+function createHeart(){
+const heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+document.body.appendChild(heart);
+setTimeout(()=>{heart.remove();},5000);
+}
+setInterval(createHeart,300);
+
+// 🎵 Backup autoplay trigger (first click anywhere)
+document.addEventListener("click", function () {
+const music = document.getElementById("music");
+music.play().catch(() => {});
+}, { once: true });
+
+
+
+</script>
+
+</body>
+</html>
